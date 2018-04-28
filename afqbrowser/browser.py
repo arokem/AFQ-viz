@@ -443,7 +443,7 @@ def update_settings_json(settings_path, title=None, subtitle=None,
 
 def assemble(source, target=None, metadata=None,
              title=None, subtitle=None,
-             link=None, sublink=None):
+             link=None, sublink=None, zip=False):
     """
     Spin up an instance of the AFQ-Browser with data provided as a mat file.
 
@@ -475,6 +475,9 @@ def assemble(source, target=None, metadata=None,
 
     sublink : str, optional.
         Custom href for page subtitle. Default: None.
+    
+    zip : bool, optional
+        Whether to zip up the resulting client folder. Default: False.
     """
     if target is None:
         target = '.'
@@ -497,6 +500,15 @@ def assemble(source, target=None, metadata=None,
         nodes_fname, meta_fname, params_fname = afq_mat2tables(
             source,
             out_path=out_path)
+
+    if zip:
+        shutil.make_archive('AFQ-Browser',
+                            'zip',
+                            op.join(site_dir, 'client'))
+
+        # Remove the unzipped version
+        shutil.rmtree(site_dir)
+
 
 
 def run(target=None, port=8080):
