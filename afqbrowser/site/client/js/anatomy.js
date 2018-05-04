@@ -312,7 +312,7 @@ afqb.three.init = function (streamlinesCallback) {
     var domEvents = new THREEx.DomEvents(afqb.three.camera, afqb.three.renderer.domElement);
 
     // load fiber bundle using jQuery
-    $.getJSON("data/streamlines.json", function (json) {
+    $.getJSON("https://rawgit.com/arokem/AFQ-Browser/zip/afqbrowser/site/client/data/streamlines.json", function (json) {
         var names = afqb.plots.tracts.map(function(name) {
             return afqb.global.formatKeyName(name);
         });
