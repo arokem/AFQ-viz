@@ -49,15 +49,17 @@ afqb.global.updateQueryString = function(queryObj) {
  *
  * @param callback - function to call after the settings have been loaded
  */
+
+
 afqb.global.initSettings = function (callback) {
     "use strict";
     if (afqb.global.settings.loaded) {
         // Don't load settings again if called twice on accident
         if (callback) { callback(null); }
 	} else {
-        // Load default settings from settings.json
-        d3.json("settings.json", function(settings) {
             "use strict";
+            // Initialize default values:
+	        var settings = {"three":{"lHOpacity":0.01,"rHOpacity":0.7,"fiberOpacity":0.25,"colorOpacity":0.85,"highlightOpacity":0.75,"fiberLineWidth":1,"colorLineWidth":2,"highlightLineWidth":2.5,"showStats":false,"cameraPosition":{"x":-14.999999999999998,"y":-9.184850993605148e-16,"z":9.184850993605148e-16},"mouseoverHighlight":true,"fiberRepresentation":"all fibers"},"plots":{"checkboxes":{},"zoom":{"rd":{}},"bundleBrush":{"tract0":{"brushOn":false,"brushExtent":[0,100]},"tract1":{"brushOn":false,"brushExtent":[0,100]},"tract2":{"brushOn":false,"brushExtent":[0,100]},"tract3":{"brushOn":false,"brushExtent":[0,100]},"tract4":{"brushOn":false,"brushExtent":[0,100]},"tract5":{"brushOn":false,"brushExtent":[0,100]},"tract6":{"brushOn":false,"brushExtent":[0,100]},"tract7":{"brushOn":false,"brushExtent":[0,100]},"tract8":{"brushOn":false,"brushExtent":[0,100]},"tract9":{"brushOn":false,"brushExtent":[0,100]},"tract10":{"brushOn":false,"brushExtent":[0,100]},"tract11":{"brushOn":false,"brushExtent":[0,100]},"tract12":{"brushOn":false,"brushExtent":[0,100]},"tract13":{"brushOn":false,"brushExtent":[0,100]},"tract14":{"brushOn":false,"brushExtent":[0,100]},"tract15":{"brushOn":false,"brushExtent":[0,100]},"tract16":{"brushOn":false,"brushExtent":[0,100]},"tract17":{"brushOn":false,"brushExtent":[0,100]},"tract18":{"brushOn":false,"brushExtent":[0,100]},"tract19":{"brushOn":false,"brushExtent":[0,100]}},"brushTract":false,"plotKey":"rd","lineOpacity":0.3,"errorType":"std"},"table":{"sort":{"key":null,"order":"ascending","count":2},"prevSort":{"key":null,"order":"ascending","count":2},"splitMethod":"Equal Size","selectedRows":{}},"global":{"html":{"title":"AFQ Browser"}}}
             // Update with values from query string
             var qsSettings = Qs.parse(location.search.slice(1));
             var updatedSettings = $.extend(true, {}, settings, qsSettings);
@@ -163,7 +165,7 @@ afqb.global.initSettings = function (callback) {
             afqb.global.settings.loaded = true;
 
             if (callback) { callback(null); }
-        });
+        //});
 	}
 };
 
