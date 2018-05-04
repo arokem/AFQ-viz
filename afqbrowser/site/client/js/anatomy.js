@@ -271,7 +271,7 @@ afqb.three.init = function (streamlinesCallback) {
     // model
     // load brain surface using OBJLoader
     var loader = new THREE.OBJLoader();
-    loader.load('data/freesurf.OBJ', function (object) {
+    loader.load('https://rawgit.com/arokem/AFQ-Browser/zip/afqbrowser/site/client/data/freesurf.OBJ', function (object) {
         afqb.three.brain = object;
         afqb.three.rh = object.getObjectByName('rh.pial.asc');
         afqb.three.lh = object.getObjectByName('lh.pial.asc');
