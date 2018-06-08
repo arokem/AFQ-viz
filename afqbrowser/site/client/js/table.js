@@ -394,7 +394,7 @@ afqb.table.refreshTable = function () {
 
 			afqb.table.subData.forEach(afqb.global.idColor); // color lines
 
-			d3.csv("data/nodes.csv", afqb.plots.changePlots);
+			d3.csv("/data/nodes.csv", afqb.plots.changePlots);
 
             if (afqb.table.settings.restoring) {
                 if (afqb.table.settings.sort.order === "ascending") {
@@ -560,5 +560,5 @@ afqb.table.tableMouseDown = function () {
 
 afqb.global.queues.subjectQ = d3_queue.queue();
 afqb.global.queues.subjectQ.defer(afqb.global.initSettings);
-afqb.global.queues.subjectQ.defer(d3.csv, "data/subjects.csv");
+afqb.global.queues.subjectQ.defer(d3.csv, "/data/subjects.csv");
 afqb.global.queues.subjectQ.await(afqb.table.buildTable);
