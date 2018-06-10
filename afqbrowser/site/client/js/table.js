@@ -393,8 +393,8 @@ afqb.table.refreshTable = function () {
 			};
 
 			afqb.table.subData.forEach(afqb.global.idColor); // color lines
-
-			d3.csv(document.getElementById('nodes_csv').value, afqb.plots.changePlots);
+            uri = new URI(location.href)
+			d3.csv(uri.protocol() + '://' + uri.hostname() + document.getElementById('nodes_csv').value, afqb.plots.changePlots);
 
             if (afqb.table.settings.restoring) {
                 if (afqb.table.settings.sort.order === "ascending") {
@@ -558,7 +558,8 @@ afqb.table.tableMouseDown = function () {
 	}
 };
 
+uri = new URI(location.href)
 afqb.global.queues.subjectQ = d3_queue.queue();
 afqb.global.queues.subjectQ.defer(afqb.global.initSettings);
-afqb.global.queues.subjectQ.defer(d3.csv, document.getElementById("subjects_csv").value);
+afqb.global.queues.subjectQ.defer(d3.csv, uri.protocol() + '://' + uri.hostname() + document.getElementById('subjects_csv').value);
 afqb.global.queues.subjectQ.await(afqb.table.buildTable);

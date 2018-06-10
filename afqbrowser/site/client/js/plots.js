@@ -279,8 +279,8 @@ afqb.plots.buildPlotGui = function (error, data) {
 		.add(afqb.global.controls.plotsControlBox, 'plotKey', nodeKeys)
 		.name('Metric')
 		.onChange(function (value) {
-
-			d3.csv(document.getElementById('nodes_csv').value, function(data, error) {
+			uri = new URI(location.href)
+			d3.csv(uri.protocol() + '://' + uri.hostname() + document.getElementById('nodes_csv').value, function(data, error) {
             	afqb.plots.changePlots(data, error);
                 // update y label
                 d3.selectAll(".y.label").remove();
@@ -308,7 +308,8 @@ afqb.plots.buildPlotGui = function (error, data) {
 		.add(afqb.global.controls.plotsControlBox, 'errorType', ['stderr', 'std'])
         .name('Error Type')
         .onChange(function () {
-            d3.csv(document.getElementById('nodes_csv').value, afqb.plots.changePlots);
+			uri = new URI(location.href)
+            d3.csv(uri.protocol() + '://' + uri.hostname() + document.getElementById('nodes_csv').value, afqb.plots.changePlots);
         })
 		.onFinishChange(function (value) {
             // Update the query string
@@ -1238,5 +1239,6 @@ afqb.plots.initCheckboxes = function (error) {
 
 afqb.global.queues.nodeQ = d3_queue.queue();
 afqb.global.queues.nodeQ.defer(afqb.global.initSettings);
-afqb.global.queues.nodeQ.defer(d3.csv, document.getElementById('nodes_csv').value);
+uri = new URI(location.href)
+afqb.global.queues.nodeQ.defer(d3.csv, uri.protocol() + '://' + uri.hostname() + document.getElementById('nodes_csv').value);
 afqb.global.queues.nodeQ.await(afqb.plots.buildFromNodes);
