@@ -271,7 +271,8 @@ afqb.three.init = function (streamlinesCallback) {
     // model
     // load brain surface using OBJLoader
     var loader = new THREE.OBJLoader();
-    loader.load('https://rawgit.com/arokem/AFQ-Browser/zip/afqbrowser/site/client/data/freesurf.OBJ', function (object) {
+    uri = new URI(location.href)
+    loader.load(uri.protocol() + '://' + uri.hostname() + document.getElementById('freesurf_obj').value, function (object) {
         afqb.three.brain = object;
         afqb.three.rh = object.getObjectByName('rh.pial.asc');
         afqb.three.lh = object.getObjectByName('lh.pial.asc');
@@ -312,7 +313,8 @@ afqb.three.init = function (streamlinesCallback) {
     var domEvents = new THREEx.DomEvents(afqb.three.camera, afqb.three.renderer.domElement);
 
     // load fiber bundle using jQuery
-    $.getJSON("https://rawgit.com/arokem/AFQ-Browser/zip/afqbrowser/site/client/data/streamlines.json", function (json) {
+    uri = new URI(location.href)
+    $.getJSON(uri.protocol() + '://' + uri.hostname() + document.getElementById('streamlines_json').value, function (json) {
         var names = afqb.plots.tracts.map(function(name) {
             return afqb.global.formatKeyName(name);
         });
